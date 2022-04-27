@@ -1,0 +1,39 @@
+## FTP runs on Port 21 ###
+
+What is an FTP server?
+- FTP stands for File Transfer Protocol and it is typically used by organizations to transfer files within or between organizations
+- It can be connected to using netcat (nc), telnet, or the ftp command
+
+
+Steps to determine if FTP is available:
+1. Run nmap agains the IP and look for an open port on port 21
+2. If it is open, attempt to connect to it via:
+  a. ftp <ip address> 
+  b. nc -v <ip address> 21
+  c. telnet <ip address> 21
+3. Using one of these 3 connections, you can determine the version of the FTP server
+
+Once you have the version of FTP you can use a tool like searchsploit to search for vulnerabilities
+- https://www.exploit-db.com/searchsploit
+
+Example Command:
+searchsploit ftp
+
+Or you can use Exploit DB directly:
+- https://www.exploit-db.com/
+
+### Anonymous Login ###
+
+FTP Servers are typically not configured to allow anonymous login BUT every so often somone will forcefully configure a server to allow this.
+
+If this happens a person can connect to the ftp service using a command like so:
+
+ftp <ip address>
+USER: anonymous
+PASS: anonymous
+
+Other options:
+1. Use hydra to brute force FTP
+  a. https://infosecwriteups.com/beginner-guide-on-attacking-and-defending-ftp-server-part-1-2-635d5373adf1
+  b. https://linuxhint.com/bruteforce_ssh_ftp/
+  c. 
