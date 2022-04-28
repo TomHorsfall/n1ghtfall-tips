@@ -32,6 +32,17 @@ ftp <ip address>
 USER: anonymous
 PASS: anonymous
 
+Active vs. Passive FTP
+
+Active FTP (FTP server connects back to client):
+1. Client opens connection (Port N) to FTP server on Port 21
+2. Client tells server what port the client will listen on (N+1)
+3. From port 20 on the FTP server, the server connects back to the client on port N+1
+4. Data transfer happens
+5. Connection closes
+
+Passive FTP (Client connects to FTP server on listening port)
+
 Other options:
 1. Use hydra to brute force FTP
   a. https://infosecwriteups.com/beginner-guide-on-attacking-and-defending-ftp-server-part-1-2-635d5373adf1
