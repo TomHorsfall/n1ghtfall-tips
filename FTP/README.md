@@ -1,5 +1,5 @@
 
-## FTP runs on Port 21 ###
+# FTP runs on Port 21 ###
 
 What is an FTP server?
 - FTP stands for File Transfer Protocol and it is typically used by organizations to transfer files within or between organizations
@@ -23,7 +23,7 @@ searchsploit ftp
 Or you can use Exploit DB directly:
 - https://www.exploit-db.com/
 
-### Anonymous Login ###
+# Anonymous Login ###
 
 FTP Servers are typically not configured to allow anonymous login BUT every so often somone will forcefully configure a server to allow this.
 
