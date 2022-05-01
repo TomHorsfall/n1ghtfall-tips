@@ -155,6 +155,8 @@ nmap -sF <ip address>
 
 3. Xmas Scan (-sX)
 ```bash
+nmap -sX <ip address>
+```
 
 
 
