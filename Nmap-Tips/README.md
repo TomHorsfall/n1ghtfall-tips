@@ -114,7 +114,47 @@ Example:
 nmap -sU -sS <ip address>
 ```
 
+UDP Scanning is different than TCP scannign in that a UDP scan works by sending a UDP packet to every targeted port. For most ports, this packet will be empty (no payload) but for a few of the more common ports a protocol-specific payload will be sent. 
 
+Based on the response (or lack thereof) the port is assigned to one of four states. 
+
+![Screenshot](1udp-responses.png)
+
+### Biggest challenges with UDP scans are that open ports rarely respond to empty probes. 
+- The ports probed where nmap has prtocol specific payloads are more likely to get a response and be marked open
+- Otherwise messages are usually passed up the TCP/IP stack to the listening application which usually discards it immediately as invalid. 
+- When nmap receives no response after several attempts it cannot determine whether the port is open or filtered. 
+- Every UDP protocol is slightly different and requires different pieces of information which is why it can be difficult to figure out if a port is open or not. 
+
+When version scannings is enabled (using is -sV flag or the -A flag) it will send UDP probes to every open/filtered port. If any of the probes elicit a response from an open/filtered port that state is changed to open. 
+
+For more information on UDP NMAP Scans go to: https://nmap.org/book/scan-methods-udp-scan.html
+
+## 4. TCP FIN (-sF) , NULL (-sN), and Xmas (-sX) Scans
+
+Resources: 
+- https://nmap.org/book/scan-methods-null-fin-xmas-scan.html
+
+One loophole to the TCP protocol is that if a destination port is CLOSED, any packet that is sent to it without a RST flag set will receive a RST flag in response. 
+
+It also says that any packets sent to OPEN ports without the SYN, RST, or ACk bits set will return a RST if the port is closed and no response at all if the port is open. 
+
+What this means is if we choose to exclude any of those three bits within an nmap scan, we should be able to determine what ports are opened or closed using this logic. Nmap created 3 scans for this including:
+
+1. Null Scan (-sN)
+```bash
+nmap -sN <ip address>
+```
+- Does not set any buts (TCP flag header is 0)
+
+2. FIN Scan (-sF)
+```bash
+nmap -sF <ip address>
+```
+-Just sets the FIN bit
+
+3. Xmas Scan (-sX)
+```bash
 
 
 
