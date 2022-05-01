@@ -14,12 +14,18 @@
 - it is the foundation of the internet as it currently exists and ensures that data transmission is carried out uniformily. 
 - It is used for organizing data in a way that ensures the secure transmission between the server and client. For this reason it is used to transmit data from other higher level protocls that require all transmitted data to arrive. 
 
-
 Common Protocols that use TCP:
 
 - HTTP
 - SSH
 - SMTP
+
+### The TCP HandShake
+
+Resource: https://www.geeksforgeeks.org/tcp-3-way-handshake-process/ 
+
+![Screenshot](1tcp-handshake.png)
+
 
 
 

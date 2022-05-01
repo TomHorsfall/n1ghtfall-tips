@@ -77,11 +77,9 @@ Can be run on nmap like so:
 ```bash
 nmap -sT <ip address>
 ```
-This scan is used if a user does not have RAW PACKET PRIVILEGES which is typical in a UNIX system. This separation exists because the NETWORK AND THE HARDWARE ARE
-CONSIDERED TRUSTED because they are controlled by a select few adminsitrators. 
+This scan is used if a user does not have RAW PACKET PRIVILEGES which is typical in a UNIX system. This separation exists because the NETWORK AND THE HARDWARE ARE CONSIDERED TRUSTED because they are controlled by a select few adminsitrators. 
 
-A TCP Connect Scan works a bit different than other scans. Rather than using raw packets it asks the OS to call the "connect" system call. This is the same high-level
-system call that web browsers, P2P clients, and most other network-enabled applications use to establish a connection. (This is a part of the Berkley Sockets API)
+A TCP Connect Scan works a bit different than other scans. Rather than using raw packets it asks the OS to call the "connect" system call. This is the same high-level system call that web browsers, P2P clients, and most other network-enabled applications use to establish a connection. (This is a part of the Berkley Sockets API)
 
 Rather than reading raw packets off the wire nmap uses this API to obtain status information on each connection attempt. 
 
