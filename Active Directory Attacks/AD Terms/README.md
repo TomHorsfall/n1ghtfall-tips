@@ -83,9 +83,9 @@ iii. The client IP address needs to coincide with the TGT IP Address
 ### D. TGS_REP Stage: If all of the above is successful then you get a Ticket Granting Server Reply
 
 If everything works up to this point the user will get a TGS_REP packet which contains:
-i. The SPN to which access has been granted (Encrypted using the session key associated with the TGT)
-ii. A Session key to be used between the client and the SPN (Encrypted using the session key associated with the TGT)
-iii. A service ticket containing the username and group memberships along with the newly created session key. (encrypted using the password hash of the service account registered with the SPN in question) (This is a vuln aka kerberoasting)
+- The SPN to which access has been granted (Encrypted using the session key associated with the TGT)
+- A Session key to be used between the client and the SPN (Encrypted using the session key associated with the TGT)
+-  A service ticket containing the username and group memberships along with the newly created session key. (encrypted using the password hash of the service account registered with the SPN in question) (This is a vuln aka kerberoasting)
 
 
 
