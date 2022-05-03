@@ -3,6 +3,10 @@
 1. [Authentication](#authentication):
     - [NTLM Authentication](#ntlm)
     - [Kerberos Authentication](#kerberos-authentication)
+        - [AS_REQ](#a-asreq-stage-authenticate-to-the-dc)
+        - [AS_REP](#b-asrep-stage-receive-a-reply-from-the-dc)
+        - [TGS_REQ](#c-tgsreq-stage-requesting-access-to-a-service-on-the-network)
+        - [TGS_REP](#d-tgsrep-stage-if-all-of-the-above-is-successful-then-you-get-a-ticket-granting-server-reply)
 2. [KDC (Key Distribution Center)](#kdc-key-distribution-center)
 3. [Registered Service Principal Name (SPNs)]
 Understanding Cached Credentials and Storage
@@ -65,10 +69,10 @@ To avoid tampering, the TGT is encrypted by a secret known only by the KDC and c
 - Essentially a Service Principal Name (SPN) is the name of a service a user might want to connect to. 
 
 The user computer contacts the KDC by creating a **Ticket Granting Service Request (TGS_REQ)** packet that contains:
-a. The current user
-b. A timestamp encrypted using the session key
-c. The SPN of the resource
-d. The encrypted TGT
+- The current user
+- A timestamp encrypted using the session key
+- The SPN of the resource
+- The encrypted TGT
 
 5. The **Ticket Granting Service** on the KDC receives the TGS_REQ and if the SPN exists in the domain, the TGT is decrypted using the secret key known only to the KDC (KRBTGT user)
 
@@ -76,9 +80,9 @@ Several things happen at this stage that make my head hurt. It's a lot to rememb
 
 a. The session key is extracted from the TGT and used to decrypt the username and timestamp of the request. This allows the system to:
 
-i. Check the timestamp and verify this is not a replay attack
-ii. Verify that the username from the TGT is the same as the username from the TGS_REQ
-iii. The client IP address needs to coincide with the TGT IP Address
+- Check the timestamp and verify this is not a replay attack
+- Verify that the username from the TGT is the same as the username from the TGS_REQ
+- The client IP address needs to coincide with the TGT IP Address
 
 ### D. TGS_REP Stage: If all of the above is successful then you get a Ticket Granting Server Reply
 
