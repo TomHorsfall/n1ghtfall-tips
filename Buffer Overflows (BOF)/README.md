@@ -19,6 +19,7 @@ Here's some terminology we should get familiar with prior to jumping in (or jump
 5. CPU
 6. Assembly
 7. Bounds Checking
+8. x86 Architecture
 
 ### Buffer
 So what the hell even is a buffer anyway?
@@ -51,5 +52,44 @@ Application Memory Terms to Learn:
 3. Static/ Global Memory (Global Variables): 
 4. Code (Instructions/ Base Code)
 
+When a binary application is executed it allocates memoru in a very specific way within the memory boundaries used by modern computers. 
+
+Memory boundaries for Windows computers is between (0x00000000) and (0x7FFFFFFF)
+
+When a thread is run it needs an area of memory for functions, local variables, and program control nformation known as the **stack**
+
+Each htread in a running application has its own stack. Stack memory is viewed by the CPU as a LIFO Strcture. 
+
+**LIFO**: Last in First Out
+
+When accessing the stack, items put ("pushed") on the top of the stack are removed ("popped") first. 
+
+In particular the x86 Architecture implements dedicated PUSH and POP assembly instructions in order to add or remove data to the stack respectively.
+
+### Function Returns
+
+When code runs, it must know the location of the function in memory and most importantly which address to return to **when the function completes.** This return address is stored on the stack. This is what exploit developers need to target. 
+
+**Stack frame**: The collection of data associated with one function call stored in a section of the stack memory (it highlights the location of all functions and parameter locations. 
+
+
+### Understanding CPU Registers
+
+Resources: 
+ - https://www.techtarget.com/whatis/definition/register
+ - 
+A CPU Register is a small set of data holding places that are a part of a computer processor. It may hold:
+- An Instruction
+- A storage address
+- Or any kind of data (bit sequence or individual characters)
+
+A register must be large enough to hold an instruction. This is where the architecture of computers comes in to play. For Example:
+
+A 64-Bit Computer must have registers that are 64 bits in length
+
+### x86 Architecture
+
+1. Program Memory: Essentially this is where data pertaining to a particular program is stored. 
+2. The Stack: Where functions, local variables, and program control information is stored (how code should be run.)
 
 
