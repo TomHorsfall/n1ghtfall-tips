@@ -34,7 +34,7 @@ in this system the Domain Controller is used as a Key Distribution Center to acc
 Here we can quickly go through the steps of Kerberos Authentication which I am going to breakdown into 3 stages:
 
 ### A. AS_REQ Stage (Authenticate to the DC)
-1. A user logs into a workstation and a **request is sent to the DC**. This is called an **Authentication Server Request (AS_REQ)
+1. A user logs into a workstation and a **request is sent to the DC**. This is called an **Authentication Server Request (AS_REQ)**
 
 What is in the **AS_REQ**?:
 - A timestamp encrypted using the user's hashed password
@@ -65,27 +65,27 @@ To avoid tampering, the TGT is encrypted by a secret known only by the KDC and c
 - Essentially a Service Principal Name (SPN) is the name of a service a user might want to connect to. 
 
 The user computer contacts the KDC by creating a **Ticket Granting Service Request (TGS_REQ)** packet that contains:
- a. The current user
- b. A timestamp encrypted using the session key
- c. The SPN of the resource
- d. The encrypted TGT
+a. The current user
+b. A timestamp encrypted using the session key
+c. The SPN of the resource
+d. The encrypted TGT
 
- 5. The **Ticket Granting Service** on the KDC receives the TGS_REQ and if the SPN exists in the domain, the TGT is decrypted using the secret key known only to the KDC (KRBTGT user)
+5. The **Ticket Granting Service** on the KDC receives the TGS_REQ and if the SPN exists in the domain, the TGT is decrypted using the secret key known only to the KDC (KRBTGT user)
 
- Several things happen at this stage that make my head hurt. It's a lot to remember:
+Several things happen at this stage that make my head hurt. It's a lot to remember:
 
- a. The session key is extracted from the TGT and used to decrypt the username and timestamp of the request. This allows the system to:
+a. The session key is extracted from the TGT and used to decrypt the username and timestamp of the request. This allows the system to:
 
-  i. Check the timestamp and verify this is not a replay attack
-  ii. Verify that the username from the TGT is the same as the username from the TGS_REQ
-  iii. The client IP address needs to coincide with the TGT IP Address
+i. Check the timestamp and verify this is not a replay attack
+ii. Verify that the username from the TGT is the same as the username from the TGS_REQ
+iii. The client IP address needs to coincide with the TGT IP Address
 
-  ### D. TGS_REP Stage: If all of the above is successful then you get a Ticket Granting Server Reply
+### D. TGS_REP Stage: If all of the above is successful then you get a Ticket Granting Server Reply
 
-  If everything works up to this point the user will get a TGS_REP packet which contains:
-  i. The SPN to which access has been granted (Encrypted using the session key associated with the TGT)
-  ii. A Session key to be used between the client and the SPN (Encrypted using the session key associated with the TGT)
-  iii. A service ticket containing the username and group memberships along with the newly created session key. (encrypted using the password hash of the service account registered with the SPN in question) (This is a vuln aka kerberoasting)
+If everything works up to this point the user will get a TGS_REP packet which contains:
+i. The SPN to which access has been granted (Encrypted using the session key associated with the TGT)
+ii. A Session key to be used between the client and the SPN (Encrypted using the session key associated with the TGT)
+iii. A service ticket containing the username and group memberships along with the newly created session key. (encrypted using the password hash of the service account registered with the SPN in question) (This is a vuln aka kerberoasting)
 
 
 
