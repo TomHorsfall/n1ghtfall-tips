@@ -48,7 +48,7 @@ What is in the **AS_REQ**?:
 ### B. AS_REP Stage (Receive a Reply from the DC)
 3. The DC replies to the client with an **Authentication Server Reply (AS_REP)** that contains
 - A session key (Kerberos is stateless aka it doesn't keep track of login activity)
-    - The session key is encrypted using the user's hashed password. (This is a vulnerability)
+    - The session key is encrypted using the user's hashed password. 
 - A **Ticket Granting Ticket (TGT)**
 
 To not get confused moving forward here are some notes about the TGT. 
@@ -74,7 +74,7 @@ The user computer contacts the KDC by creating a **Ticket Granting Service Reque
 - The SPN of the resource
 - The encrypted TGT
 
-5. The **Ticket Granting Service** on the KDC receives the TGS_REQ and if the SPN exists in the domain, the TGT is decrypted using the secret key known only to the KDC (KRBTGT user)
+5. The **Ticket Granting Service** on the KDC receives the TGS_REQ and if the SPN exists in the domain (This can be exploited if an attacker gains access to a machine, pre-auth is turned off, and the attacker brute forces for common SPNs), the TGT is decrypted using the secret key known only to the KDC (KRBTGT user)
 
 Several things happen at this stage that make my head hurt. It's a lot to remember:
 
@@ -86,11 +86,23 @@ a. The session key is extracted from the TGT and used to decrypt the username an
 
 ### D. TGS_REP Stage: If all of the above is successful then you get a Ticket Granting Server Reply
 
-If everything works up to this point the user will get a TGS_REP packet which contains:
+6. If everything works up to this point the user will get a TGS_REP packet which contains:
 - The SPN to which access has been granted (Encrypted using the session key associated with the TGT)
 - A Session key to be used between the client and the SPN (Encrypted using the session key associated with the TGT)
--  A service ticket containing the username and group memberships along with the newly created session key. (encrypted using the password hash of the service account registered with the SPN in question) (This is a vuln aka kerberoasting)
+-  A service ticket containing the username and group memberships along with the newly created session key. (encrypted using the password hash of the service account registered with the SPN in question) (This is a vuln aka kerberoasting because if the attacker brute forced for SPNs and they now have access to the service account hash, they can take it offline and try to crack it.)
 
+Once the authentication process by the KDC is complete and the client has both a session key and a service ticket, the service authentication begins.
+
+### E. AP_REQ: After all that crap NOW the user can try to authenticate to the Application server (AKA what service it wants to access)
+7. The client sends to the Application server an ***application request*** or AP_REQ which includes:
+- The encrypted username and timestamp (using the session key associated with the service ticket)
+- The service ticket itself
+
+8. The application server decrypts the service ticket using the service account password hash and extracts the username and the session key. 
+- It then uses the session key to decrypt the username from the AP_REQ .
+    - If the AP_REQ username matches the one decrypted from the service ticket the request is accepted. 
+    - Before access is granted the service inspects the supplied group memerships in the service ticket and assigns the appropriate permissions to the user
+        - After this, the user may access the requested service 
 
 
 
