@@ -54,11 +54,11 @@ What is in the **AS_REQ**?:
 To not get confused moving forward here are some notes about the TGT. 
 
 Information contained in a TGT is all associated with the user that has authenticated. Including:
- a. Group memberships (permissions the user has)
- b. The domain
- c. A timestamp
- d. The IP Address of the Client
- e. The session key
+- Group memberships (permissions the user has)
+- The domain
+- A timestamp
+- The IP Address of the Client
+- The session key
 
 To avoid tampering, the TGT is encrypted by a secret known only by the KDC and cannot be decrypted by the client (knowing this, if a user somehow got ahold of the secret used by the KDC, they could use this to create false tickets which is better known as a Golden Ticket Attack)
 
@@ -78,11 +78,10 @@ The user computer contacts the KDC by creating a **Ticket Granting Service Reque
 
 Several things happen at this stage that make my head hurt. It's a lot to remember:
 
-a. The session key is extracted from the TGT and used to decrypt the username and timestamp of the request. This allows the system to:
-
-- Check the timestamp and verify this is not a replay attack
-- Verify that the username from the TGT is the same as the username from the TGS_REQ
-- The client IP address needs to coincide with the TGT IP Address
+- The session key is extracted from the TGT and used to decrypt the username and timestamp of the request. This allows the system to:
+    - Check the timestamp and verify this is not a replay attack
+    - Verify that the username from the TGT is the same as the username from the TGS_REQ
+    - The client IP address needs to coincide with the TGT IP Address
 
 ### D. TGS_REP Stage: If all of the above is successful then you get a Ticket Granting Server Reply
 
