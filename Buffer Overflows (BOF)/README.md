@@ -35,6 +35,13 @@ Something to make you think about a real life analogy to what happens in a Buffe
  
 Think about if a friend of yours is carrying a big ol pot. And you happen to have a hose. The pot can hold a finite amount of water (think of this as a memory bound). If you overfill the pot, water begins to start leaking out. This analogy highlights what can happen with a buffer overflow. If your friend is too nice and doesn't set any boundaries you could keep filling the pot until the overflow fills the entire apartment you're standing in (A Denial of Service). Or it could cause your friend to drop the pot and do something they didn't intend to do (Break something).
 
+## What is EIP (Extended Instruction Pointer)?
+
+EIP: Called the Extended Instruction Pointer is the address of the NEXT INSTRUCTION TO EXECUTE. It is a special register in the CPU. 
+
+
+
+
 ### Program Memory
 
 Memory for programs are stored in a variety of locations outlined below: 
@@ -70,7 +77,7 @@ In particular the x86 Architecture implements dedicated PUSH and POP assembly in
 
 When code runs, it must know the location of the function in memory and most importantly which address to return to **when the function completes.** This return address is stored on the stack. This is what exploit developers need to target. 
 
-**Stack frame**: The collection of data associated with one function call stored in a section of the stack memory (it highlights the location of all functions and parameter locations. 
+**Stack frame**: The collection of data associated with one function call stored in a section of the stack memory (it highlights the location of all functions and parameter locations.)
 
 
 ### Understanding CPU Registers
