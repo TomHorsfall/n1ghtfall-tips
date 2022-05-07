@@ -56,3 +56,27 @@ Attacks that Mimikatz can carry out (It's honestly very scary how much it can do
 
 
 
+### Manual Ways of Attacking AD
+
+## The klist command
+
+This command can be used to display all cached Kerberos tickets for the current user. 
+
+## Attacking Service Accounts
+
+Some things to remember as we dive into this topic:
+1. When a user wants to access a resource hosted by an SPN the client requests a service ticket created by the DC. 
+- The service ticket is then decrypted and validated by the Application Server
+- **KEY TAKEAWAY**: THE SERVICE IS ABLE TO BE DECRYPTED AND VALIDATED BY THE APPLICATION SERVER ***BECAUSE IT IS ENCRYPTED THROUGH THE PASSWORD HASH OF THAT SERVICE ACCOUNT**
+
+Ok, so why did I just yell at you in italics. 
+
+I yelled because as it turns out, the DC will hand over tickets of SPNs without verifying that you (the super crazy good pentester logged in as someone else) has permissions to access the service hosted by any particular SPN. 
+
+SO if you were being evil, you could guess some common SPN/ Service names using I don't know *shrug* an automated script that tries to collect tickets.
+
+OK, so again, why did I yell in italics. 
+
+***Because we can take those tickets (encrypted using the Service Account passwords), and try to decrypt them offline. If we succeed, we get passwords.***
+
+Bam, we may have access to service account logins. 
