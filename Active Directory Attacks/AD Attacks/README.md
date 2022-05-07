@@ -62,7 +62,7 @@ Attacks that Mimikatz can carry out (It's honestly very scary how much it can do
 
 This command can be used to display all cached Kerberos tickets for the current user. 
 
-## Attacking Service Accounts
+## Attacking Service Accounts (Aka KERBEROASTING)
 
 Some things to remember as we dive into this topic:
 1. When a user wants to access a resource hosted by an SPN the client requests a service ticket created by the DC. 
@@ -77,6 +77,9 @@ SO if you were being evil, you could guess some common SPN/ Service names using 
 
 OK, so again, why did I yell in italics. 
 
-***Because we can take those tickets (encrypted using the Service Account passwords), and try to decrypt them offline. If we succeed, we get passwords.***
+***Because we can take those tickets (encrypted using the Service Account passwords), and try to decrypt them offline. If we succeed, we get passwords. And now you know what Kerberoasting is. ***
 
 Bam, we may have access to service account logins. 
+
+## So how can we attack the service accounts
+

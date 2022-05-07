@@ -1,5 +1,9 @@
 # AD Terms to Know
 
+Resources used to create this page:
+- https://www.sciencedirect.com/topics/computer-science/ticket-granting-service 
+
+
 1. [Authentication](#authentication):
     - [NTLM Authentication](#ntlm)
     - [Kerberos Authentication](#kerberos-authentication)
@@ -26,16 +30,39 @@ NTLM is a way of performing authentication against a server. There are multiple 
 7. The domain controller encrypts the **nonce** using the hashed password stored for that particular user. 
 8. If the response provided by the user is the same as the **nonce/ challenge** that is hashed by the stored password in the DC, the authentication is successful. 
 
-NTLM Hashes are not the most secure and can be easily cracked within a few days with modest equipment. 
+NTLM Hashes are not the most secure and can be easily cracked within a few days with modest equipment. NTLM is also easily exploitable using Pass-The-Hash or by taking passwords offline and cracking them (can do this using a tool called Mimikatz)
 
 
 ## Kerberos Authentication
 
-A ticket system created by Microsoft to increase security that lacked in NTLM. 
+- A ticket system created by Microsoft to increase security that lacked in NTLM. 
+- In this system the Domain Controller is used as a Key Distribution Center to access services across a network. 
 
-in this system the Domain Controller is used as a Key Distribution Center to access services across a network. 
+
+## KDC (Key Distribution Center)
+
+Resource Used: https://www.sciencedirect.com/topics/computer-science/ticket-granting-service
+
+The Key Distribution Center is the center of the Kerberos process. The KDC holds a database of the keys used in the authentication process and consists of two main parts: An **Authentication Service** and a **Ticket Granting Service**
+
+### Authentication Service
+    - As it very clearly says in the title, this portion of the KDC is used to authenticate the client (aka the person or user attempting to authenticate via Kerberos)
+
+### Ticket Granting Service
+    - The Ticket Granting Service is utilized after the client has authenticated and is used to provide ***tickets*** and ***Ticket Granting Tickets*** to the client systems. 
+
+### Ticket Granting Tickets (TGTs)
+    Questions to ask yourself:
+
+    - What is in a TGT?
+        1. The client ID (aka the username of the user trying to authenticate)
+        2. The client IP Address (The machine on the network that is authenticating)
+        3. The ticket validity period (aka a timestamp. These tickets last 10 hours.)
+        4. The ***Ticket Granting Server Session Key***
 
 Here we can quickly go through the steps of Kerberos Authentication which I am going to breakdown into 3 stages:
+
+## Kerberos Authentication Explained (Steps A through E):
 
 ### A. AS_REQ Stage (Authenticate to the DC)
 1. A user logs into a workstation and a **request is sent to the DC**. This is called an **Authentication Server Request (AS_REQ)**
@@ -48,7 +75,8 @@ What is in the **AS_REQ**?:
 ### B. AS_REP Stage (Receive a Reply from the DC)
 3. The DC replies to the client with an **Authentication Server Reply (AS_REP)** that contains
 - A session key (Kerberos is stateless aka it doesn't keep track of login activity)
-    - The session key is encrypted using the user's hashed password. 
+    - The session key is encrypted using the user's hashed password.
+        - It may be decrypted by the client and re-used
 - A **Ticket Granting Ticket (TGT)**
 
 To not get confused moving forward here are some notes about the TGT. 
@@ -68,11 +96,11 @@ To avoid tampering, the TGT is encrypted by a secret known only by the KDC and c
 4. When a user wishes to access a service or resource on the domain (this could be a network share, a printer, an internal web application, etc.) that has a **Registered Service Principal Name** the user must contact the KDC again (located at the DC). 
 - Essentially a Service Principal Name (SPN) is the name of a service a user might want to connect to. 
 
-The user computer contacts the KDC by creating a **Ticket Granting Service Request (TGS_REQ)** packet that contains:
-- The current user
-- A timestamp encrypted using the session key
-- The SPN of the resource
-- The encrypted TGT
+    The user computer contacts the KDC by creating a **Ticket Granting Service Request (TGS_REQ)** packet that contains:
+    1. The current user
+    2. A timestamp encrypted using the session key
+    3. The SPN of the resource
+    4. The encrypted TGT
 
 5. The **Ticket Granting Service** on the KDC receives the TGS_REQ and if the SPN exists in the domain (This can be exploited if an attacker gains access to a machine, pre-auth is turned off, and the attacker brute forces for common SPNs), the TGT is decrypted using the secret key known only to the KDC (KRBTGT user)
 
@@ -104,17 +132,6 @@ Once the authentication process by the KDC is complete and the client has both a
         - After this, the user may access the requested service 
 
 
-
-
-
-
-
-
-
-
-
-
-## KDC (Key Distribution Center)
 
 
 
