@@ -83,3 +83,50 @@ Bam, we may have access to service account logins.
 
 ## So how can we attack the service accounts
 
+
+
+
+
+
+
+
+## Pass The Hashm (PtH)
+
+Important info to note about PtH: ***This technique only works against servers/ services using NTLM for authentication. This technique DOES NOT WORK against kerberos.***
+
+Tools that can be used to perform PtH:
+
+1. Metasploit
+2. Passing-the-hash Toolkit
+3. Impacket
+
+Pass the Hash is typically carried out through the utilization of the SMB protocol (On port 445 typically FYI. SMB shares are typically turned on within an enterprise environment). In order for PtH to be successful we need to authenticate to this protocol with the hashed password of an admin user. 
+
+The reason we need an admin user to Pass the Hash is because if we are exploiting this vulnerability through SMB, these exploits will attempt tpo authenticate to the $admin SMB share. (File and print dharing also need to be enabled for this to work)
+
+When a user connects to the SMB share via PtH, the usage of the hash is actually not illicit in nature. What makes it illicit is that the attacker gained access to the hash in an illicit way. 
+
+
+
+## Overpass the Hash
+
+Unlike PtH, OPtH can be used to gain a full Kerberos Ticket (TGT) or service ticket which grants us access to another machine or serivce as that user. 
+
+Steps: 
+1. Compromise a workstation or server (so easy right?)
+2. Run mimikatz (or any other tool that can list logonpasswords) - aka check for cached passwords
+3. Take the hash from the last step and use the NTLM hash of an admin user to OPtH
+    - Reminder: The main purpose of OPtH is to leverage an NTLM hash to create a Kerberos ticket. 
+    - We want to avoid using NTLM authentication
+    - To do this we can run the mimikatz command:
+    ```bash
+    sekurlsa::pth
+    ```
+    - What this does is create a new process in the context of whatever user we may be targeting
+    - A full example command:
+        ```bash
+        sekurlsa::pth /user:admin /domain:bigbiz.com /ntlm:<hash value goes here> /run:<an executable of your choosing>
+        ```
+
+
+
