@@ -19,13 +19,13 @@ This command is used in Windows to display what is stored in the current working
 
 Switches used by the dir command:
 
-d: Displays all directories in the current path
-r: Displays read only files
-h: Displays hidden files
-a: Files that are ready for archiving??
-s: system files (a.) files that Windows depend on to operate and b.) files with the hidden flag turned on)
-i: Not content indexed files
-l: Reparse points?
+- d: Displays all directories in the current path
+- r: Displays read only files
+- h: Displays hidden files
+- a: Files that are ready for archiving??
+- s: system files (a.) files that Windows depend on to operate and b.) files with the hidden flag turned on)
+- i: Not content indexed files
+- l: Reparse points?
  
 
 Important Notes:
@@ -56,12 +56,13 @@ One can use the /O switch followed by various codes to display results by time a
 
 Switches to use with dir “ /O” to sort your results:
 
+```bash
 D: Sorts by date/ time. Older entries appear first.dir
 E: Sorts by file extension in alphabetical order.
 G: Sorts by listing folders first, then files.
 N: Sorts by the name of file/ folder in alphabetical order.
 S: Sorts by file size, smallest to largest.
- 
+```
 
 Important Notes:
 
