@@ -21,6 +21,12 @@ What are some examples of Registers? See below:
 
 1. **ESP: The Stack Pointer**: 
 - During a thread's execution, the stack is constantly in flux which can make it difficult for a function to locate its own stack frame. This is where the **Stack Pointer** comes into play. 
+- Stack frame components:
+    - A stack frame is comprised of:
+        - Local variables
+        - Saved copies of registers modified by subprograms that could need restoration
+        - Argument parameters 
+        - Return address
 - The Stack Pointer (ESP) keeps track of the ***most recently referenced*** location on the stack (aka the top of the stack) by storing a pointer to it. 
 
 2. **EBP: The Base Pointer**:
