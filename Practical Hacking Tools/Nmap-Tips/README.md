@@ -159,9 +159,17 @@ nmap -sX <ip address>
 
 
 
+# Nmap -Pn Flag
 
+Typically when running nmap, the default functionality will be to use a ping to determine if the host is up. 
 
+By using this flag you are telling nmap to skip sending the ping. 
 
+You might want to add this flag in the event you keep getting an error that says something to the effect of "host does not appear to be up"
+
+This might be because the system does not allow pings to be sent to it. By going straight to a port scan, it eliminates this issue. 
+
+The thing to remember is that if you are scanning a subnet, it will portscan all machines on that subnet without checking if they are up. The benefit of the ping before running nmap is to make sure not to run nmap on an IP that does not actually have a machine running
 
 
 

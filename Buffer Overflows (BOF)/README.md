@@ -24,7 +24,7 @@ Here's some terminology we should get familiar with prior to jumping in (or jump
 ### Buffer
 So what the hell even is a buffer anyway?
 - A buffer is a memory place or location which is used by a running program
-- This memory location is used to store some temporary data thjat is being used by the program
+- This memory location is used to store some temporary data that is being used by the program
  
 For example:
 If we have a program that takes a name as input and outputs it to the screen, and we type the name "Tom" as input, the word "Tom" would be stored in the buffer until the program executes the print command. 
@@ -33,7 +33,7 @@ So basically a **buffer is a location in the computers memory where information 
 
 Something to make you think about a real life analogy to what happens in a Buffer Overflow: 
  
-Think about if a friend of yours is carrying a big ol pot. And you happen to have a hose. The pot can hold a finite amount of water (think of this as a memory bound). If you overfill the pot, water begins to start leaking out. This analogy highlights what can happen with a buffer overflow. If your friend is too nice and doesn't set any boundaries you could keep filling the pot until the overflow fills the entire apartment you're standing in (A Denial of Service). Or it could cause your friend to drop the pot and do something they didn't intend to do (Break something).
+Think about if a friend of yours is carrying a big pot. And you happen to have a hose. The pot can hold a finite amount of water (think of this as a memory bound). If you overfill the pot, water begins to start leaking out. This analogy highlights what can happen with a buffer overflow. If your friend is too nice and doesn't set any boundaries you could keep filling the pot until the overflow fills the entire apartment you're standing in (A Denial of Service). Or it could cause your friend to drop the pot and do something they didn't intend to do (Break something).
 
 ## What is EIP (Extended Instruction Pointer)?
 

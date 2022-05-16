@@ -23,13 +23,13 @@ A service that goes hand in hand with SMB is the NetBIOS service.
 While modern implementations of SMB can work without NetBIOS,**NetBIOS over TCP is required for backward compatibility** and is often enabled together. 
 
 NetBIOS Provides 3 Services:
-1. Name Service (NetBIOS-NS) for name registration and resolution
-2. Datagram distribution service (NetBIOS-DGM) for connectionless communication
-3. Session service (NetBIOS-SSN) for connection oriented communication 
+1. **Name Service (NetBIOS-NS)** for name registration and resolution
+2. **Datagram distribution service (NetBIOS-DGM)** for connectionless communication
+3. **Session service (NetBIOS-SSN)** for connection oriented communication 
 
 ## SMB and NetBIOS are Different Protocols
 
-- SMB on port 445 and NetBIOS on port 139 are separate protocols but are often scannned together. 
+- **SMB on port 445 and NetBIOS on port 139 are separate protocols** but are often scannned together. 
 - NetBIOS allows computers on a network to communicate with one another
 - SMB can do the same thing but NetBIOS has been used in older machines and so NetBIOS over TCP (NBT) was created so that newer and older computers could still communicate. 
 - This is why you will often see SMB and NetBIOS clumped together in examples. 
@@ -41,6 +41,12 @@ NetBIOS Provides 3 Services:
 1. nmap (Don't forget about NSE Scripts!)
 2. nbtscan
 3. smbmap
+4. nmblookup
+5. crackmapexec
+6. enum4linux
+7. smbclient
+8. rpcclient
+
 
 
 Nmap is often used to search for these services 
