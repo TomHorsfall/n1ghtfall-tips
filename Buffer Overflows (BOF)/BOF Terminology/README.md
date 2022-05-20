@@ -1,12 +1,32 @@
 # BOF T3erminology to Understand
 
+Resources:
+- https://sghosh2402.medium.com/understanding-exploiting-stack-based-buffer-overflows-acf9b8659cba 
+- https://www.tutorialspoint.com/how-does-a-process-look-like-in-memory
 
+## Buffers
+- Memory space that is allocated by the OS to allow a program to run
+
+## Threads
+- A thread is a sequential flow of control within a program
+- Typically people talk about threads when there are multiple threads running at the same time and performing different tasks within a single program
+
+## Stacks
+- The stacks is a piece of process memory (aka a program loaded into memory and executed)
+    - https://www.tutorialspoint.com/how-does-a-process-look-like-in-memory
+- A Stack gets allocated by the OS for each thread
+- When the thread ends the stack is cleared as well
+- **The size of the stack is defined when it is created and doesn't change**
+
+## Stack Frame
+- A **stack frame** is a frame of data that gets pushed onto the stack. 
+- 
 
 
 ## Registers
 
 What is a register? 
-- A register is a storage component on a CPU that is used to temporarily stored data. There are a variety of different registers in a CPU that hold various types of information. 
+- A register is a storage component on a CPU that is used to temporarily store data. There are a variety of different registers in a CPU that hold various types of information. 
 
 What are some examples of Registers? See below:
 
@@ -39,8 +59,13 @@ What are some examples of Registers? See below:
 - The EIP directs the flow of a program and so if an attacker can control the EIP, they can direct the EIP to run code that normally wouldn't run. 
 - THE EIP IS THE MAIN TARGET FOR ATTACKERS WHEN EXPLOITING A MEMORY CORRUPTION VULNERABILITY. 
 
+
+
 ## Offsets
 
 
 
 ## Offsets
+
+## Buffer Overflow Overview:
+![program-mem](1-BOF-Overview.PNG)
