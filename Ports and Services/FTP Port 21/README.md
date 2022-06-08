@@ -35,7 +35,7 @@ PASS: anonymous
 
 
 
-Active vs Passive FTP Connections
+## Active vs Passive FTP Connections
 
 Active FTP (FTP server connects back to client):
 1. Client opens connection (Port N) to FTP server on Port 21
@@ -44,12 +44,12 @@ Active FTP (FTP server connects back to client):
 4. Data transfer happens
 5. Connection closes
 
-Active FTP: 
+### Active FTP: 
 a. The FTP client first initates the control connection from its port N to FTP servers command port 21
 b. The client then listens to port N+1 and sends the port N+1 to FTP server.
 c. FTP Server then initiates the data connection, from its port M to the port N+1
 
-Passive FTP:
+### Passive FTP:
 a. Client initiates the control connection from its port N to the port 21 of FTP server. 
 b. The client issues a passv command
 c. The server then sends the client one of its port number M
