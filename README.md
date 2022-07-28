@@ -7,4 +7,6 @@ Rather than taking notes and keeping them all to myself, I thought this would be
 
 The goal is to to find resources on various security topics and combine them all into one location. As I grow as a professional, I want to continue to grow this page. 
 
-P.S. VS Code doesn't have spellcheck so I apologize if my grammar and spelling aren't perfect. 
+P.S. VS Code doesn't have spellcheck so I apologize if my grammar and spelling aren't perfect. You will also see that many pages are half-finished. As I study I add what I can. I plan to restructure/ organize my code as time goes on. 
+
+
